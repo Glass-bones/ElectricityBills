@@ -1,0 +1,7 @@
+<Solution>
+  <Configurations>
+    <Platform Name="x64" />
+    <Platform Name="x86" />
+  </Configurations>
+  <Project Path="Classwork/Classwork.vcxproj" Id="102d42f1-d676-48cb-9a18-9edf15ac060e" />
+</Solution>
