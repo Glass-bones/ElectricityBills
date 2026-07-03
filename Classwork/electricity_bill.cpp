@@ -1,14 +1,15 @@
 #include "electricity_bill.h"
 #include <iostream>
 #include <stdexcept>
+#include <ctime>
 using namespace std;
-class electricity_bill
-{
-	double mnthUsage[12];
-	int year;
-	double saleRate;
-public:
-	void setMnthUsage(int mnth, double usage)
+//class electricity_bill
+//{
+//	double mnthUsage[12];
+//	int year;
+//	double saleRate;
+//public:
+	void electricity_bill::setMnthUsage(int mnth, double usage)
 	{
 		if (mnth >= 0)
 			if (mnth<12)
@@ -19,13 +20,13 @@ public:
 				}
 		throw exception("invalid value: month and/or usage");
 	};
-	double getMnthUsage(int mnth)
+	double electricity_bill::getMnthUsage(int mnth)
 	{
 		if (mnthUsage[mnth]>=0)
 		return mnthUsage[mnth];
 		throw exception("usage not set");
 	};
-	void setSaleRate(double sr)
+	void electricity_bill::setSaleRate(double sr)
 	{
 		if (sr > 0)
 		{
@@ -34,13 +35,13 @@ public:
 		}
 		throw exception("invalid value: sale rate");
 	};
-	double getSaleRate()
+	double electricity_bill::getSaleRate()
 	{
 		if (saleRate>0)
 		return saleRate;
 		throw exception("sale rate not set");
 	};
-	void setYear(int yr)
+	void electricity_bill::setYear(int yr)
 	{
 		if (yr >= 1890)
 		{
@@ -49,64 +50,61 @@ public:
 		}
 		throw exception("invalid value: year");
 	};
-	int getYear()
+	int electricity_bill::getYear()
 	{
 		if (year >= 1890)
 		return year;
 		throw exception("year not set");
 	};
-	double sumPay()
+	double electricity_bill::sumPay()
 	{
 		double sum=0;
-		double mu;
-		double sr;
-		for (int i = 0;i < 12;i++)
-			try
+		double sr=saleRate;
+		if(sr>0)
+		{
+			for (int i = 0;i < 12;i++)
 			{
-				mu = getMnthUsage(i);
-				sr = getSaleRate();
-				sum += mu * sr;
+				if (mnthUsage[i] >= 0)
+					sum += mnthUsage[i] * sr;
+				else if (i > 0)
+					return sum;
+				else return -1;
 			}
-			catch (exception& err)
-			{
-				cout << err.what() << ", remaining elements are ignored" << endl;
-				return sum;
-			}
-		return sum;
+			return sum;
+		}
+				
+		return -1;
 	};
-	double avrgMnthUsage()
+	double electricity_bill::avrgMnthUsage()
 	{
 		double sum = 0;
-		double mu;
 		for (int i = 0;i < 12;i++)
-			try
-			{
-				mu = getMnthUsage(i);
-				sum += mu;
-			}
-			catch (exception& err)
-			{
-				cout << err.what() << ", remaining elements are ignored" << endl;
+		{
+			if (mnthUsage[i] >= 0)
+				sum += mnthUsage[i];
+			else if (i > 0)
 				return sum/i;
-			}
-			return sum / 12;
+			else return -1;
+		}
+		return sum / 12;
 	};
-	electricity_bill()
+	electricity_bill::electricity_bill()
 	{
 		for (int i = 0; i < 12; i++) mnthUsage[i] = -1;
 		year = -1;
 		saleRate = -1;
 	};
-	electricity_bill(int yr, double sr)
+	electricity_bill::electricity_bill(int yr, double sr)
 	{ 
 		setYear(yr);
 		setSaleRate(sr);
 		int mnth = 0;
 		double usage = -1;
 		bool cond = true;
+		cout << "input negative number to ignore remaining elements;" << endl;
 			while(cond&&mnth<12)
 			{
-				cout<<"input usage for "<<mnth+1<<"th month (input negative number to keep left monthly usage unset): ";
+				cout<<"input usage for "<<mnth+1<<" month: ";
 				cin >> usage;
 				if (usage >= 0)
 				{
@@ -121,7 +119,7 @@ public:
 				mnth++;
 			}
 	};
-	electricity_bill(double firstUsg, int yr, double sr)
+	electricity_bill::electricity_bill(double firstUsg, int yr, double sr)
 	{
 		setYear(yr);
 		setSaleRate(sr);
@@ -129,4 +127,4 @@ public:
 		for (int i = 1;i < 12;i++)
 			mnthUsage[i] = -1;
 	};
-};
+//};
