@@ -3,25 +3,21 @@
 #include <stdexcept>
 #include <ctime>
 using namespace std;
-//class electricity_bill
-//{
-//	double mnthUsage[12];
-//	int year;
-//	double saleRate;
-//public:
 	void electricity_bill::setMnthUsage(int mnth, double usage)
 	{
-		if (mnth >= 0)
-			if (mnth<12)
-				if (usage >= 0)
-				{
-					mnthUsage[mnth] = usage;
-					return;
-				}
-		throw exception("invalid value: month and/or usage");
+		if (mnth < 0 || mnth>11) 
+			throw exception("invalid value: month");
+		if (usage >= 0)
+		{
+			mnthUsage[mnth] = usage;
+			return;
+		}
+		throw exception("invalid value: usage");
 	};
 	double electricity_bill::getMnthUsage(int mnth)
 	{
+		if (mnth > 11 || mnth < 0)
+			throw exception("invalid value: month");
 		if (mnthUsage[mnth]>=0)
 		return mnthUsage[mnth];
 		throw exception("usage not set");
