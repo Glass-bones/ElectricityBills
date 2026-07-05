@@ -1,7 +1,7 @@
 #include "electricity_bill.h"
 #include <iostream>
 #include <stdexcept>
-#include <ctime>
+#include <random>
 using namespace std;
 	void electricity_bill::setMnthUsage(int mnth, double usage)
 	{
@@ -20,6 +20,12 @@ using namespace std;
 			throw exception("invalid value: month");
 		if (mnthUsage[mnth]>=0)
 		return mnthUsage[mnth];
+		throw exception("usage not set");
+	};
+	double electricity_bill::getMnthUsage()
+	{
+		if (mnthUsage[0] >= 0)
+			return mnthUsage[0];
 		throw exception("usage not set");
 	};
 	void electricity_bill::setSaleRate(double sr)
@@ -123,4 +129,26 @@ using namespace std;
 		for (int i = 1;i < 12;i++)
 			mnthUsage[i] = -1;
 	};
-//};
+	electricity_bill::electricity_bill(time_t t)
+	{
+		srand(t);
+		setYear(rand() % 1890 + 1890);
+		setSaleRate((rand() % 1890) / 100.0);
+		for (int i = 0;i < 12;i++)
+			setMnthUsage(i, (rand() % 1890) / 100.0);
+	};
+	const double& electricity_bill::operator[](int index)
+	{
+		if (index > 11 || index < 0)
+			throw exception("index out of bounds");
+		if (mnthUsage[index] < 0)
+			throw exception("invalid value: usage");
+		if (saleRate >= 0)
+			return mnthUsage[index] * saleRate;
+		throw exception("invalid value: sale rate");
+	};
+	ostream& operator<<(ostream& os, electricity_bill eb)
+	{
+		os << "year = " << eb.getYear() << "\nsale rate = " << eb.getSaleRate()<<endl;
+		return os;
+	};
