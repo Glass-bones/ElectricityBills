@@ -92,6 +92,7 @@ using namespace std;
 	};
 	electricity_bill::electricity_bill()
 	{
+		if (mnthUsage == nullptr) mnthUsage = new double[12];
 		for (int i = 0; i < 12; i++) mnthUsage[i] = -1;
 		year = -1;
 		saleRate = -1;
@@ -104,6 +105,7 @@ using namespace std;
 		double usage = -1;
 		bool cond = true;
 		cout << "input negative number to ignore remaining elements;" << endl;
+		if (mnthUsage == nullptr) mnthUsage = new double[12];
 			while(cond&&mnth<12)
 			{
 				cout<<"input usage for "<<mnth+1<<" month: ";
@@ -125,6 +127,7 @@ using namespace std;
 	{
 		setYear(yr);
 		setSaleRate(sr);
+		if (mnthUsage == nullptr) mnthUsage = new double[12];
 		setMnthUsage(0,firstUsg);
 		for (int i = 1;i < 12;i++)
 			mnthUsage[i] = -1;
@@ -134,6 +137,7 @@ using namespace std;
 		srand(t);
 		setYear(rand() % 1890 + 1890);
 		setSaleRate((rand() % 1890) / 100.0);
+		if (mnthUsage == nullptr) mnthUsage = new double[12];
 		for (int i = 0;i < 12;i++)
 			setMnthUsage(i, (rand() % 1890) / 100.0);
 	};
@@ -152,3 +156,12 @@ using namespace std;
 		os << "year = " << eb.getYear() << "\nsale rate = " << eb.getSaleRate()<<endl;
 		return os;
 	};
+	electricity_bill::~electricity_bill()
+	{
+		if (mnthUsage != nullptr)
+		{
+			delete [] mnthUsage;
+			mnthUsage = nullptr;
+		}
+		cout << "month usage data erased" << endl;
+	}

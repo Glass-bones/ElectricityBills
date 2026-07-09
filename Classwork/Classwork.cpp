@@ -195,7 +195,7 @@ int main()
         }
     }
     double a = 0;
-    electricity_bill inmas[10];
+    electricity_bill* inmas = new electricity_bill[10];
     for (int i = 0;i < 10;i++)
     {
         inmas[i] = electricity_bill(time(nullptr));
