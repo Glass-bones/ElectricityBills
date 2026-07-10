@@ -2,8 +2,9 @@
 #include "electricity_bill.h"
 #include "eb_w_penalty.h"
 #include <iostream>
+#include <windows.h>
 using namespace std;
-void operator += (double& sum, electricity_bill& eb)
+void operator += (double& sum, eb_w_penalty& eb)
 {
     sum += eb.avrgMnthUsage();
 }
@@ -233,12 +234,15 @@ int main()
         }
     }
     double a = 0;
-    eb_w_penalty* inmas = new eb_w_penalty[10];
+    eb_w_penalty** inmas = new eb_w_penalty*[10];
     for (int i = 0;i < 10;i++)
     {
-        inmas[i] = eb_w_penalty(time(nullptr));
-        a += inmas[i];
+        inmas[i] = new eb_w_penalty(time(nullptr));
+        srand(time(nullptr));
+        Sleep(rand() % 100+1000);
+        a += *inmas[i];
     }
+    delete[] inmas;
     cout <<"sum of averages = "<<a << "\nfirst month usage = " << (*testElBil)[0] << endl;
     cout << *testElBil << "'ere we go" << endl;
     return 0;
