@@ -1,5 +1,6 @@
 ﻿// Classwork.cpp : Этот файл содержит функцию "main". Здесь начинается и заканчивается выполнение программы.
 #include "electricity_bill.h"
+#include "eb_w_penalty.h"
 #include <iostream>
 using namespace std;
 void operator += (double& sum, electricity_bill& eb)
@@ -12,11 +13,12 @@ int main()
     electricity_bill* testElBil = nullptr;
     while (choise < 0 || choise>4)
     {
-        cout << "testing class electricity_bill\n0 - create empty instance\n1 - create instance with first monthly usage set\n2 - create instance with monthly usage setup loop\n3 - end test" << endl;
+        cout << "testing class eb_w_penalty\n0 - create empty instance\n1 - create instance with first month set\n2 - create instance with month setup loop\n3 - create random instance\n4 - end test" << endl;
         cin >> choise;
         int year;
         double saleRate;
         double firstUsg;
+        double firstPen;
         switch (choise)
         {
         case 0:
@@ -29,9 +31,11 @@ int main()
             cin >> saleRate;
             cout << "usage in first month = ";
             cin >> firstUsg;
+            cout << "penalty in first month = ";
+            cin >> firstPen;
             try
             {
-                testElBil = new electricity_bill(firstUsg,year,saleRate);
+                testElBil = new eb_w_penalty(year,firstUsg,saleRate,firstPen);
             }
             catch (exception& err)
             {
@@ -46,7 +50,7 @@ int main()
             cin >> saleRate;
             try
             {
-                testElBil = new electricity_bill(year, saleRate);
+                testElBil = new eb_w_penalty(year, saleRate);
             }
             catch (exception& err)
             {
@@ -55,6 +59,9 @@ int main()
             }
             break;
         case 3:
+            testElBil = new eb_w_penalty(time(nullptr));
+            break;
+        case 4:
             return 0;
         default:
             system("cls");
@@ -63,9 +70,9 @@ int main()
     }
     system("cls");
     choise = -1;
-    while (choise!=8)
+    while (choise!=10)
     {
-        cout << "testing class electricity_bill\n0 - set month usage\n1 - get month usage\n2 - set sale rate\n3 - get sale rate\n4 - set year\n5 - get year\n6 - get payment summary\n7 - get average monthly usage\n8 - end test"<<endl;
+        cout << "testing class eb_w_penalty\n0 - set month usage\n1 - get month usage\n2 - set sale rate\n3 - get sale rate\n4 - set year\n5 - get year\n6 - get payment summary\n7 - get average monthly usage\n8 - set penalty\n9 - get penalty\n10 - end test"<<endl;
         cin >> choise;
         int month;
         int year;
@@ -188,7 +195,38 @@ int main()
             }
             break;
         case 8:
+            cout << "month = ";
+            cin >> month;
+            cout << "penalty = ";
+            cin >> d;
+            try
+            {
+                testElBil->setPenalty(month - 1, d);
+                system("cls");
+            }
+            catch (exception& err)
+            {
+                system("cls");
+                cout << err.what() << endl;
+            }
             break;
+        case 9:
+            cout << "month = ";
+            cin >> month;
+            try
+            {
+                d = testElBil->getPenalty(month - 1);
+                system("cls");
+                cout << month << " month usage = " << d << endl;
+            }
+            catch (exception& err)
+            {
+                system("cls");
+                cout << err.what() << endl;
+            }
+            break;
+        case 10:
+            break
         default:
             system("cls");
             cout << "invalid value" << endl;
