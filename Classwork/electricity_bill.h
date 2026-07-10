@@ -3,7 +3,7 @@
 #include <ctime>
 class electricity_bill
 {
-	double mnthUsage[12];
+	double* mnthUsage=nullptr;
 	int year;
 	double saleRate;
 public:
@@ -14,7 +14,7 @@ public:
 	double getSaleRate();
 	void setYear(int);
 	int getYear();
-	double sumPay();
+	virtual double sumPay();
 	double avrgMnthUsage();
 	electricity_bill();
 	electricity_bill(int, double);
@@ -22,4 +22,5 @@ public:
 	electricity_bill(time_t);
 	const double& operator[](int);
 	friend std::ostream& operator <<(std::ostream&, const electricity_bill);
+	virtual ~electricity_bill();
 };

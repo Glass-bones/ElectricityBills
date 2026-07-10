@@ -128,9 +128,11 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Classwork.cpp" />
+    <ClCompile Include="eb_w_penalty.cpp" />
     <ClCompile Include="electricity_bill.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="eb_w_penalty.h" />
     <ClInclude Include="electricity_bill.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
