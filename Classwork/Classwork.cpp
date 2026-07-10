@@ -10,7 +10,7 @@ void operator += (double& sum, electricity_bill& eb)
 int main()
 {
     int choise = -1;
-    electricity_bill* testElBil = nullptr;
+    eb_w_penalty* testElBil = nullptr;
     while (choise < 0 || choise>4)
     {
         cout << "testing class eb_w_penalty\n0 - create empty instance\n1 - create instance with first month set\n2 - create instance with month setup loop\n3 - create random instance\n4 - end test" << endl;
@@ -22,7 +22,7 @@ int main()
         switch (choise)
         {
         case 0:
-            testElBil = new electricity_bill();
+            testElBil = new eb_w_penalty();
             break;
         case 1:
             cout << "year = ";
@@ -217,7 +217,7 @@ int main()
             {
                 d = testElBil->getPenalty(month - 1);
                 system("cls");
-                cout << month << " month usage = " << d << endl;
+                cout << month << " month penalty = " << d << endl;
             }
             catch (exception& err)
             {
@@ -226,17 +226,17 @@ int main()
             }
             break;
         case 10:
-            break
+            break;
         default:
             system("cls");
             cout << "invalid value" << endl;
         }
     }
     double a = 0;
-    electricity_bill* inmas = new electricity_bill[10];
+    eb_w_penalty* inmas = new eb_w_penalty[10];
     for (int i = 0;i < 10;i++)
     {
-        inmas[i] = electricity_bill(time(nullptr));
+        inmas[i] = eb_w_penalty(time(nullptr));
         a += inmas[i];
     }
     cout <<"sum of averages = "<<a << "\nfirst month usage = " << (*testElBil)[0] << endl;

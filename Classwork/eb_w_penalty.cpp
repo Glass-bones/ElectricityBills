@@ -49,7 +49,7 @@ eb_w_penalty::eb_w_penalty(int year, double saleRate):electricity_bill(year, sal
 	{
 		cout << "input penalty for " << mnth + 1 << " month: ";
 		cin >> pen;
-		if (usage >= 0)
+		if (pen >= 0)
 		{
 			setPenalty(mnth, pen);
 			mnth++;
