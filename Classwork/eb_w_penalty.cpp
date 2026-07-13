@@ -1,4 +1,5 @@
 #include "eb_w_penalty.h"
+#include <random>
 using namespace std;
 void eb_w_penalty::setPenalty(int mnth, double pen)
 {
@@ -72,13 +73,23 @@ eb_w_penalty::eb_w_penalty(int year, double firstUsg, double saleRate, double fi
 }
 eb_w_penalty::eb_w_penalty(time_t t):electricity_bill(t)
 {
-	srand(t);
+	random_device frnd;
+	mt19937 gen(frnd());
+	uniform_real_distribution<double> d(0.00, 20.00);
+	bernoulli_distribution yn(0.3);
+	if (penalty == nullptr) penalty = new double[12];
+	for (int i = 0;i < 12;i++)
+		if (yn(gen))
+			setPenalty(i, d(gen));
+		else
+			setPenalty(i, 0);
+	/*srand(t);
 	if (penalty == nullptr) penalty = new double[12];
 	for (int i = 0;i < 12;i++)
 		if (rand() % 10 < 4)
 			setPenalty(i, (rand() % 1890) / 1000.0);
 		else
-			setPenalty(i, 0);
+			setPenalty(i, 0);*/
 };
 eb_w_penalty::~eb_w_penalty()
 {

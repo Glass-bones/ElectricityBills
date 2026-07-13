@@ -20,7 +20,7 @@ public:
 	electricity_bill(int, double);
 	electricity_bill(double, int, double);
 	electricity_bill(time_t);
-	const double& operator[](int);
+	//const double& operator[](int);
 	friend std::ostream& operator <<(std::ostream&, const electricity_bill);
 	virtual ~electricity_bill();
 };

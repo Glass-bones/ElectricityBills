@@ -134,14 +134,22 @@ using namespace std;
 	};
 	electricity_bill::electricity_bill(time_t t)
 	{
-		srand(t);
+		random_device frnd;
+		mt19937 gen(frnd());
+		uniform_int_distribution d(0, 1889);
+		setYear(d(gen) + 1890);
+		setSaleRate(d(gen) / 100.0);
+		if (mnthUsage == nullptr) mnthUsage = new double[12];
+		for (int i = 0;i < 12;i++)
+			setMnthUsage(i, d(gen) / 100.0);
+		/*srand(t)
 		setYear(rand() % 1890 + 1890);
 		setSaleRate((rand() % 1890) / 100.0);
 		if (mnthUsage == nullptr) mnthUsage = new double[12];
 		for (int i = 0;i < 12;i++)
-			setMnthUsage(i, (rand() % 1890) / 100.0);
+			setMnthUsage(i, (rand() % 1890) / 100.0);*/
 	};
-	const double& electricity_bill::operator[](int index)
+	/*const double& electricity_bill::operator[](int index)
 	{
 		if (index > 11 || index < 0)
 			throw exception("index out of bounds");
@@ -150,7 +158,7 @@ using namespace std;
 		if (saleRate >= 0)
 			return mnthUsage[index] * saleRate;
 		throw exception("invalid value: sale rate");
-	};
+	};*/
 	ostream& operator<<(ostream& os, electricity_bill eb)
 	{
 		os << "year = " << eb.getYear() << "\nsale rate = " << eb.getSaleRate()<<endl;
