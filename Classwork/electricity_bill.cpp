@@ -3,6 +3,14 @@
 #include <stdexcept>
 #include <random>
 using namespace std;
+	void electricity_bill::setMnths(double* d)
+	{
+
+	}
+	void electricity_bill::prntMnths()
+	{
+
+	}
 	void electricity_bill::setMnthUsage(int mnth, double usage)
 	{
 		if (mnth < 0 || mnth>11) 

@@ -1,6 +1,14 @@
 #include "eb_w_penalty.h"
 #include <random>
 using namespace std;
+void electricity_bill::setMnths(double* d)
+{
+
+}
+void electricity_bill::prntMnths()
+{
+
+}
 void eb_w_penalty::setPenalty(int mnth, double pen)
 {
 	if (mnth < 0 || mnth>11)

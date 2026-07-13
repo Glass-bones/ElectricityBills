@@ -1,12 +1,15 @@
 #pragma once
+#include "eb_menu.h"
 #include <iostream>
 #include <ctime>
-class electricity_bill
+class electricity_bill: public eb_menu
 {
 	double* mnthUsage=nullptr;
 	int year;
 	double saleRate;
 public:
+	void setMnths(double*) override;
+	void prntMnths() override;
 	void setMnthUsage(int,double);
 	double getMnthUsage(int);
 	double getMnthUsage();

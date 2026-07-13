@@ -5,6 +5,8 @@ class eb_w_penalty :
 {
     double *penalty=nullptr;
 public:
+    void setMnths(double*) override;
+    void prntMnths() override;
     void setPenalty(int, double);
     double getPenalty(int);
     const double& getPenalty() const;
