@@ -2,9 +2,10 @@
 #include "electricity_bill.h"
 #include "eb_w_penalty.h"
 #include <iostream>
+#include <format>
 #include <windows.h>
 using namespace std;
-void operator += (double& sum, eb_w_penalty& eb)
+void operator += (double& sum, electricity_bill& eb)
 {
     sum += eb.avrgMnthUsage();
 }
@@ -234,16 +235,25 @@ int main()
         }
     }
     double a = 0;
-    eb_w_penalty** inmas = new eb_w_penalty*[10];
+    electricity_bill* inmas[10];
+    double tstone[10]{ {1.1},{2.2},{3.3},{4.4},{5.5},{6.6},{7.7},{8.8},{9.9},{0.0} };
+    double tsttwo[15]{ {0.1},{0.2},{0.3},{0.4},{0.5},{0.6},{0.7},{0.8},{0.9},{1.0},{1.1},{1.2},{1.3},{1.4},{1.5} };
     for (int i = 0;i < 10;i++)
     {
-        inmas[i] = new eb_w_penalty(time(nullptr));
-        srand(time(nullptr));
-        Sleep(rand() % 100+1000);
+        if (i % 2 == 0)
+            inmas[i] = new eb_w_penalty(time(nullptr));
+        else inmas[i] = new electricity_bill(time(nullptr));
+        inmas[i]->prntMnths();
         a += *inmas[i];
+        inmas[i]->setMnths(tstone);
+        inmas[i]->prntMnths();
+        inmas[i]->setMnths(tsttwo);
+        inmas[i]->prntMnths();
+        /*srand(time(nullptr));
+        Sleep(rand() % 100+1000);*/
     }
-    delete[] inmas;
-    cout <<"sum of averages = "<<a << "\nfirst month usage = " << (*testElBil)[0] << endl;
+    for (int i = 0;i < 10;i++) delete inmas[i];
+    cout << "sum of averages = " << a << endl;
     cout << *testElBil << "'ere we go" << endl;
     return 0;
 }
