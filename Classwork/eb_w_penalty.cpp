@@ -1,13 +1,31 @@
 #include "eb_w_penalty.h"
 #include <random>
+#include <format>
 using namespace std;
-void electricity_bill::setMnths(double* d)
+void eb_w_penalty::setMnths(std::span<const double> d)
 {
-
+	if (d.size() < 12)
+	{
+		int i = 0;
+		for (double val : d)
+		{
+			setMnthUsage(i, val);
+			i++;
+		}
+	}
+	else
+		for (int i = 0;i < 12;i++)
+			setMnthUsage(i, d[i]);
 }
-void electricity_bill::prntMnths()
+void eb_w_penalty::prntMnths()
 {
-
+	cout << "year " << getYear() << "\nusage:" << endl;
+	for (int j = 0;j < 12;j++)
+		cout << "month " << j + 1 << " = " << format("{:>5.2f}", getMnthUsage(j)) << "; ";
+	cout << "\npenalty:" << endl;
+	for (int j = 0;j < 12;j++)
+		cout << "month " << j + 1 << " = " << format("{:>5.2f}", getPenalty(j)) << "; ";
+	cout << endl;
 }
 void eb_w_penalty::setPenalty(int mnth, double pen)
 {
@@ -91,6 +109,7 @@ eb_w_penalty::eb_w_penalty(time_t t):electricity_bill(t)
 			setPenalty(i, d(gen));
 		else
 			setPenalty(i, 0);
+	//поменял метод генерации чисел, чтобы не использовать время как ключ к нему (замедлял генерацию в массивах)
 	/*srand(t);
 	if (penalty == nullptr) penalty = new double[12];
 	for (int i = 0;i < 12;i++)

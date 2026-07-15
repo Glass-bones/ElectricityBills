@@ -236,18 +236,21 @@ int main()
     }
     double a = 0;
     electricity_bill* inmas[10];
+    double tstone[10]{ {1.1},{2.2},{3.3},{4.4},{5.5},{6.6},{7.7},{8.8},{9.9},{0.0} };
+    double tsttwo[15]{ {0.1},{0.2},{0.3},{0.4},{0.5},{0.6},{0.7},{0.8},{0.9},{1.0},{1.1},{1.2},{1.3},{1.4},{1.5} };
     for (int i = 0;i < 10;i++)
     {
         if (i % 2 == 0)
             inmas[i] = new eb_w_penalty(time(nullptr));
         else inmas[i] = new electricity_bill(time(nullptr));
-        cout << "year " << inmas[i]->getYear() << " usage:" << endl;
-        for (int j = 0;j < 12;j++)
-            cout << "month " << j + 1 << " = " << format("{:>5.2f}", inmas[i]->getMnthUsage(j)) << "; ";
-        cout<<endl;
+        inmas[i]->prntMnths();
+        a += *inmas[i];
+        inmas[i]->setMnths(tstone);
+        inmas[i]->prntMnths();
+        inmas[i]->setMnths(tsttwo);
+        inmas[i]->prntMnths();
         /*srand(time(nullptr));
         Sleep(rand() % 100+1000);*/
-        a += *inmas[i];
     }
     for (int i = 0;i < 10;i++) delete inmas[i];
     cout << "sum of averages = " << a << endl;

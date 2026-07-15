@@ -5,7 +5,7 @@ class eb_w_penalty :
 {
     double *penalty=nullptr;
 public:
-    void setMnths(double*) override;
+    void setMnths(std::span<const double>) override;
     void prntMnths() override;
     void setPenalty(int, double);
     double getPenalty(int);

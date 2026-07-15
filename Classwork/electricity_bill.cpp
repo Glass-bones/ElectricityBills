@@ -2,14 +2,29 @@
 #include <iostream>
 #include <stdexcept>
 #include <random>
+#include <format>
 using namespace std;
-	void electricity_bill::setMnths(double* d)
+	void electricity_bill::setMnths(std::span<const double> d)
 	{
-
+		if (d.size() < 12)
+		{
+			int i = 0;
+			for (double val : d)
+			{
+				setMnthUsage(i, val);
+				i++;
+			}
+		}
+		else
+			for (int i = 0;i < 12;i++)
+				setMnthUsage(i, d[i]);
 	}
 	void electricity_bill::prntMnths()
 	{
-
+		cout << "year " << getYear() << "\nusage:" << endl;
+		for (int j = 0;j < 12;j++)
+			cout << "month " << j + 1 << " = " << format("{:>5.2f}", getMnthUsage(j)) << "; ";
+		cout << endl;
 	}
 	void electricity_bill::setMnthUsage(int mnth, double usage)
 	{

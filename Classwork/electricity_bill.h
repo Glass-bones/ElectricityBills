@@ -8,7 +8,7 @@ class electricity_bill: public eb_menu
 	int year;
 	double saleRate;
 public:
-	void setMnths(double*) override;
+	void setMnths(std::span<const double>) override;
 	void prntMnths() override;
 	void setMnthUsage(int,double);
 	double getMnthUsage(int);
