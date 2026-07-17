@@ -16,7 +16,7 @@ public:
 	};
 	void setMnthUsageSha(int mnth, double usage)
 	{
-		eb->setMnthUsage(mnth, usage)
+		eb->setMnthUsage(mnth, usage);
 	};
 	double getMnthUsageSha(int mnth)
 	{
@@ -60,7 +60,7 @@ public:
 	};
 	eb_shablon(double firstUsage, int year, srType sr)
 	{
-		eb= new electricity_bill(firstUsage,year,(double)sr)
+		eb = new electricity_bill(firstUsage, year, (double)sr);
 	};
 	~eb_shablon()
 	{
