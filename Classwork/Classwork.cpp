@@ -1,6 +1,7 @@
 ﻿// Classwork.cpp : Этот файл содержит функцию "main". Здесь начинается и заканчивается выполнение программы.
 #include "electricity_bill.h"
 #include "eb_w_penalty.h"
+#include "eb_shablon.h"
 #include <iostream>
 #include <format>
 #include <windows.h>
