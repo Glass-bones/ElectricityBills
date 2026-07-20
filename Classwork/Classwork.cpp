@@ -12,6 +12,16 @@ void operator += (double& sum, electricity_bill& eb)
 }
 int main()
 {
+    eb_shablon ebsint = eb_shablon(1, 2222, 3, 4.4);
+    eb_shablon ebsdbl = eb_shablon(5.5, 6666, 7, 8.8);
+    cout << "2 templates (and their iterations) generated:" << endl;
+    cout << "one counts usage with integer numbers " << ebsint.getMnthUsageSha(3)<<" and starts from "<<ebsint.getStartMnth()+1<<" month" << endl;
+    cout << "another counts usage with real (double) numbers " << ebsdbl.getMnthUsageSha(7) << " and starts from " << ebsdbl.getStartMnth() + 1 << " month" << endl;
+    return 0;
+}
+/*
+int main()
+{
     int choise = -1;
     eb_w_penalty* testElBil = nullptr;
     while (choise < 0 || choise>4)
@@ -250,11 +260,11 @@ int main()
         inmas[i]->prntMnths();
         inmas[i]->setMnths(tsttwo);
         inmas[i]->prntMnths();
-        /*srand(time(nullptr));
-        Sleep(rand() % 100+1000);*/
+        //srand(time(nullptr));
+        //Sleep(rand() % 100+1000);
     }
     for (int i = 0;i < 10;i++) delete inmas[i];
     cout << "sum of averages = " << a << endl;
     cout << *testElBil << "'ere we go" << endl;
     return 0;
-}
+}*/
