@@ -134,6 +134,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="eb_menu.h" />
+    <ClInclude Include="eb_shablon.h" />
     <ClInclude Include="eb_w_penalty.h" />
     <ClInclude Include="electricity_bill.h" />
   </ItemGroup>
