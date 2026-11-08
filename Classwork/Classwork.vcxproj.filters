@@ -15,15 +15,15 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Classwork.cpp">
+    <ClCompile Include="main.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-    <ClCompile Include="electricity_bill.cpp">
+    <ClCompile Include="electricBill.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="electricity_bill.h">
+    <ClInclude Include="electricBill.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
   </ItemGroup>
